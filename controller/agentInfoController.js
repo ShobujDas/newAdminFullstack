@@ -43,7 +43,7 @@ exports.addAgentInfo = async(req,res)=>{
             nominee,
             nomineeRel,
             nomineeMobile,
-            permanentAddress 
+            nomineeMobile 
         }).save();
 
 
@@ -71,13 +71,13 @@ exports.addAgentInfo = async(req,res)=>{
 
 exports.getAgentIfo = async (req,res)=>{
   try {
-      const getPoints = await AgentInfoModel.find({})
+      const getInfo = await AgentInfoModel.find({})
 
       res.status(200).send({
           success:true,
           message:"Get all Agent Points data",
-          total_count:getPoints.length,
-          getPoints,
+          total_count:getInfo.length,
+          getInfo,
       })
       
   } catch (error) {

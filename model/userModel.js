@@ -20,7 +20,7 @@ const addUserSchema = new mongoose.Schema({
         trim:true,
     },
     role:{
-        type:Number,
+        type:String,
         default:0
      },
     password:{
