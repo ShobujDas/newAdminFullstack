@@ -12,13 +12,13 @@ function ManageUser() {
       const { data } = await axios.get(
         "http://localhost:8000/api/v1/user/getUser"
       );
-      console.log(data)
+      console.log(data);
 
       if (data?.success) {
         toast.success("Get all user data");
         setUserData(data?.getUser);
-        console.log(userData)
-        console.log(userData)
+        // console.log(userData);
+        // console.log(userData);
       }
     } catch (error) {
       console.log(error);
@@ -28,8 +28,26 @@ function ManageUser() {
 
   useEffect(() => {
     getUserData();
-
   }, []);
+
+  
+  //Delete category
+  const handleDelete = async (pId) => {
+    try {
+      const { data } = await axios.delete(
+        `http://localhost:8000/api/v1/user/deleteuser/${pId}`
+      );
+      if (data.success) {
+        toast.success(`User is deleted`);
+      } else {
+        toast.error(data.error);
+      }
+      getUserData();
+    } catch (error) {
+      console.log(error);
+      toast.error("something went error");
+    }
+  };
 
   return (
     <Layout>
@@ -67,7 +85,7 @@ function ManageUser() {
                 </tr>
               </thead>
               <tbody>
-                {userData?.map((e,index) => (
+                {userData?.map((e, index) => (
                   <tr key={e._id}>
                     <th scope="row">{index + 1}</th>
                     <td>{e.name}</td>
@@ -75,10 +93,24 @@ function ManageUser() {
                     <td>{e.phone}</td>
                     <td>{e.username}</td>
                     <td>{e.role}</td>
+                    <td>
+                      <button
+                        className="btn btn-primary ms-2"
+                        onClick={() => {}}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="btn btn-danger ms-2"
+                        onClick={() => {
+                          handleDelete(e._id);
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </td>
                   </tr>
                 ))}
-
-                
               </tbody>
             </table>
           </div>

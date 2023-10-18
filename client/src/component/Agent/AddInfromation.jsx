@@ -7,7 +7,7 @@ function AddInfromation() {
     <Layout>
       <div className="row m-3  brd">
         <div className="col-md-8">
-          <h4>Agent Amount Report</h4>
+          <h4>Agent Agent Information</h4>
         </div>
         <div className="col-md-4">
           <div className="d-flex align-items-center mb-2">

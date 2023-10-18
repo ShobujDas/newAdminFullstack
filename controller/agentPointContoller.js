@@ -46,6 +46,8 @@ exports.addAgentPoint = async(req,res)=>{
 }
 
 
+//get agent points
+
 exports.getAgentPoint = async (req,res)=>{
   try {
       const getPoints = await AgentPointModel.find({})
@@ -62,6 +64,52 @@ exports.getAgentPoint = async (req,res)=>{
       res.status(500).send({
           success:false,
           message:"Error in Getting Agents points",
+          error,
+      })
+      
+  }
+}
+
+
+//update agents points
+exports.updateAgentPoint = async (req,res)=>{
+  try {
+      const getPoints = await AgentPointModel.findByIdAndUpdate(req.params.id)
+
+      res.status(200).send({
+          success:true,
+          message:"Get all Agent Points data",
+          total_count:getPoints.length,
+          getPoints,
+      })
+      
+  } catch (error) {
+      console.log(error)
+      res.status(500).send({
+          success:false,
+          message:"Error in Getting Agents points",
+          error,
+      })
+      
+  }
+}
+
+
+//delete agenet point
+exports.deleteAgentPoint = async (req,res)=>{
+  try {
+      await AgentPointModel.findByIdAndDelete(req.params.id)
+
+      res.status(200).send({
+          success:true,
+          message:"Delete Agent Points data",
+      })
+      
+  } catch (error) {
+      console.log(error)
+      res.status(500).send({
+          success:false,
+          message:"Error in deleteing Agents points",
           error,
       })
       

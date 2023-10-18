@@ -29,6 +29,28 @@ function PointList() {
     getAgetnPoints();
   }, []);
 
+  //Delete category
+  const handleDelete = async (pId) => {
+    try {
+      const { data } = await axios.delete(
+        `http://localhost:8000/api/v1/agentpoint/deletepionts/${pId}`
+      );
+      if (data.success) {
+        toast.success(`User is deleted`);
+      } else {
+        toast.error(data.error);
+      }
+      getAgetnPoints();
+    } catch (error) {
+      console.log(error);
+      toast.error("something went error");
+    }
+  };
+
+
+
+
+
   return (
     <Layout>
       <div className="row m-3  brd">
@@ -73,6 +95,22 @@ function PointList() {
                     <td>{e.agentNum}</td>
                     <td>{e.date}</td>
                     <td>{e.points}</td>
+                    <td>
+                      <button
+                        className="btn btn-primary ms-2"
+                        onClick={() => {}}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="btn btn-danger ms-2"
+                        onClick={() => {
+                          handleDelete(e._id);
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>

@@ -17,7 +17,7 @@ const handleAdd = async (e)=>{
   e.preventDefault();
   try {
     
-    alert(JSON.stringify(FormValue))
+    // alert(JSON.stringify(FormValue))
    const {data} = await axios.post("http://localhost:8000/api/v1/user/addUser",FormValue);
 
   
