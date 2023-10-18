@@ -7,6 +7,7 @@ const cors = require('cors');
 const connectDB = require('./config/bd');
 const userRoute = require('./routes/userRoute');
 const agentPointRouter = require('./routes/agentPointRoute');
+const agentInfoRouter = require('./routes/agenInfoRoute');
 
 
 
@@ -30,6 +31,7 @@ app.use(morgan('dev'))
 //routes
 app.use('/api/v1/user',userRoute)
 app.use('/api/v1/agentpoint',agentPointRouter)
+app.use('/api/v1/agentinfo',agentInfoRouter)
 
 
 

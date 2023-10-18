@@ -16,21 +16,12 @@ function AddUser() {
 const handleAdd = async (e)=>{
   e.preventDefault();
   try {
-    
     // alert(JSON.stringify(FormValue))
    const {data} = await axios.post("http://localhost:8000/api/v1/user/addUser",FormValue);
-
-  
-
    if(data?.success){
     toast.success(`${data?.UserADD.name} ${data?.message}`)
    }
-
-   
     SetFormValue({name:"",address:"",phone:"",username:"",role:"",password:""})
-  
-
-
   } catch (error) {
     console.log(error)
     toast.error("Something Went Wrong")
