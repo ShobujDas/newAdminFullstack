@@ -74,6 +74,7 @@ function InformationList() {
             <table className="table table-bordered ">
               <thead>
                 <tr>
+                  <th scope="col">#</th>
                   <th scope="col">AgentID</th>
                   <th scope="col">UserName</th>
                   <th scope="col">Password</th>
@@ -85,6 +86,7 @@ function InformationList() {
                   <th scope="col">NomineeRelation</th>
                   <th scope="col">NomineNumber</th>
                   <th scope="col">Address</th>
+                  <th scope="col">Handle</th>
                 </tr>
               </thead>
               <tbody>
@@ -94,7 +96,6 @@ function InformationList() {
                     <td>{e.agentId}</td>
                     <td>{e.userName}</td>
                     <td>{e.pass}</td>
-                    <td>{e.conPass}</td>
                     <td>{e.fullName}</td>
                     <td>{e.mobile}</td>
                     <td>{e.father}</td>
@@ -102,8 +103,8 @@ function InformationList() {
                     <td>{e.nominee}</td>
                     <td>{e.nomineeRel}</td>
                     <td>{e.nomineeMobile}</td>
-                    <td>{e.nomineeMobile}</td>
-                    <td>
+                    <td>{e.permanentAddress}</td>
+                    <td className="d-flex">
                       <button
                         className="btn btn-primary ms-2"
                         onClick={() => {}}
