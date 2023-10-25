@@ -1,5 +1,5 @@
 const express = require("express");
-const { addLogoController, getLogoController, updateLogoController ,deleteLogoController} = require("../controller/logoController");
+const { addLogoController, getLogoController, updateLogoController ,deleteLogoController, logoPhotoController} = require("../controller/logoController");
 
 
 
@@ -35,6 +35,7 @@ router.put('/updateuser/:id',updateLogoController);
 //DELETE USER || METHOD DELETE
 router.delete('/deletelogo/:id',deleteLogoController);
 
-
+//get photo 
+router.get("/get-image/:pid",logoPhotoController)
 
 module.exports = router;

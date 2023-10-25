@@ -83,7 +83,14 @@ function ManageLogo() {
               {bannerData?.map((e,index) => (
                   <tr key={e._id}>
                     <th scope="row">{index + 1}</th>
-                    <td>{e.image}</td>
+                    <td>
+                      <img
+                        src={`http://localhost:8000/public/images/${e.image}`}
+                        width={"50px"}
+                        height={"50px"}
+                        alt={e.name}
+                      />
+                    </td>
                     <td>{e.name}</td>
                     <td className="d-flex">
                       <button

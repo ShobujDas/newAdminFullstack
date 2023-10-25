@@ -74,16 +74,25 @@ function ManageLogo() {
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Banner</th>
+                  <th scope="col">Logo</th>
+                  <th scope="col">Logo</th>
                   <th scope="col">Name</th>
                   <th scope="col">Handle</th>
                 </tr>
               </thead>
               <tbody>
-              {logoData?.map((e,index) => (
+                {logoData?.map((e, index) => (
                   <tr key={e._id}>
                     <th scope="row">{index + 1}</th>
-                    <td>{e.image}</td>
+                    <td>
+                      <img
+                        src={`http://localhost:8000/public/images/${e.image}`}
+                        width={"50px"}
+                        height={"50px"}
+
+                        alt={e.name}
+                      />
+                    </td>
                     <td>{e.name}</td>
                     <td className="d-flex">
                       <button
@@ -103,7 +112,6 @@ function ManageLogo() {
                     </td>
                   </tr>
                 ))}
-                
               </tbody>
             </table>
           </div>

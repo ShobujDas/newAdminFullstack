@@ -110,3 +110,28 @@ exports.deleteLogoController = async (req,res)=>{
       
   }
 }
+
+
+//get photo
+exports.logoPhotoController = async (req, res) => {
+    try {
+      // const {slug} = req.params
+      const data = await LogoModel.findById(req.params.pid).select("image");
+      if (data.image.data) {
+        res.set("Content-type", data.image.contentType);
+        return res.status(200).send(data.image.data);
+      }
+      res.status(200).send({
+        success: true,
+        message: "photo Fetched",
+        data,
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({
+        success: false,
+        error: error.message,
+        message: "Error while getting photo",
+      });
+    }
+  };
