@@ -10,34 +10,41 @@ function AddLogo() {
     image: "",
   });
 
-  // const [imageChanged, setImageChanged] = useState(false);
+
 
   const handleChange = (Property, Value) => {
     SetFormValue({ ...FormValue, [Property]: Value });
   };
+
   const imageUpload = (e) => {
-    // console.log(e.target.files[0])
+    console.log(e.target.files[0])
     // console.log("aaaaaaa")
     SetFormValue({ ...FormValue, image: e.target.files[0] });
-    // setImageChanged(true);
-   
+    console.log(FormValue.image)
+
   };
 
   const handleUpload = async (e) => {
     e.preventDefault();
     try {
 
+
+
       const formdata = new FormData();
       formdata.append("myFile",FormValue.image,FormValue.image.name);
       formdata.append("name",FormValue.name);
 
-   
-      const {data} = await axios.post("http://localhost:8000/api/v1/logo/addlogo",formdata)
 
-      SetFormValue({ name: "", image: "" });
-      setImageChanged(false);
+      const {data} = await axios.post('http://localhost:8000/api/v1/logo/addlogo',formdata)
+      if(data?.success){
+        toast.success("Added Successfully");
+        SetFormValue({ name: "", image: "" });
+      }
+
+
     } catch (error) {
       console.log(error);
+      toast.error("Something Went Wrong")
     }
   };
 
@@ -79,7 +86,6 @@ function AddLogo() {
                 className="form-control form-control-lg"
                 id="formFileLg"
                 type="file"
-                value={FormValue.image.name}
                 onChange={ imageUpload}
               />
             </div>
