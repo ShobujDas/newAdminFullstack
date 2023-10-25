@@ -1,12 +1,12 @@
 
 
-const LogoModel = require("../model/logoModel");
+const BannerModel = require("../model/bannerModel");
 
 
 
 
-//post Logo
-exports.addLogoController = async(req,res)=>{
+//post Banner
+exports.addBannerController = async(req,res)=>{
     try {
         const image = (req.file) ? req.file.filename : null;
         const {name} = req.body;
@@ -15,14 +15,14 @@ exports.addLogoController = async(req,res)=>{
         // console.log(name)
         // console.log(req.file)
         // console.log(req.body)
-       const data = await new LogoModel({
+       const data = await new BannerModel({
         image,
         name,
       }).save();
 
       res.status(200).send({
         success:true,
-        message:"successfull logo Adding",
+        message:"successfull Banner Adding",
         data
       })
       
@@ -40,15 +40,15 @@ exports.addLogoController = async(req,res)=>{
 }
 
 
-//get Logo
+//get Banner
 
-exports.getLogoController = async (req,res)=>{
+exports.getBannerController = async (req,res)=>{
   try {
-      const data = await LogoModel.find({})
+      const data = await BannerModel.find({})
 
       res.status(200).send({
           success:true,
-          message:"Get all logo data",
+          message:"Get all banner data",
           total_count:data.length,
           data,
       })
@@ -57,7 +57,7 @@ exports.getLogoController = async (req,res)=>{
       console.log(error)
       res.status(500).send({
           success:false,
-          message:"Error in Getting Agents points",
+          message:"Error in Getting Banner Data",
           error,
       })
       
@@ -65,14 +65,14 @@ exports.getLogoController = async (req,res)=>{
 }
 
 
-//update logo
-exports.updateLogoController = async (req,res)=>{
+//update Banner
+exports.updateBannerController = async (req,res)=>{
   try {
-      const data = await LogoModel.findByIdAndUpdate(req.params.id)
+      const data = await BannerModel.findByIdAndUpdate(req.params.id)
 
       res.status(200).send({
           success:true,
-          message:"updated logo data",
+          message:"Update Banner Data",
           total_count:data.length,
           data,
       })
@@ -81,7 +81,7 @@ exports.updateLogoController = async (req,res)=>{
       console.log(error)
       res.status(500).send({
           success:false,
-          message:"Error in updating logo data",
+          message:"Error in Updating Banner Data",
           error,
       })
       
@@ -90,23 +90,29 @@ exports.updateLogoController = async (req,res)=>{
 
 
 
-//delete Logo
-exports.deleteLogoController = async (req,res)=>{
-  try {
-      await LogoModel.findByIdAndDelete(req.params.id)
 
-      res.status(200).send({
-          success:true,
-          message:"Delete Logo successfully",
-      })
-      
-  } catch (error) {
-      console.log(error)
-      res.status(500).send({
-          success:false,
-          message:"Error in deleting logo data",
-          error,
-      })
-      
+//delete Banner
+exports.deleteBannerController = async (req,res)=>{
+    try {
+        await BannerModel.findByIdAndDelete(req.params.id)
+  
+        res.status(200).send({
+            success:true,
+            message:"Delete Banner successfully",
+        })
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            success:false,
+            message:"Error in deleting Banner data",
+            error,
+        })
+        
+    }
   }
-}
+  
+
+
+
+

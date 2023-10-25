@@ -9,6 +9,7 @@ const userRoute = require('./routes/userRoute');
 const agentPointRouter = require('./routes/agentPointRoute');
 const agentInfoRouter = require('./routes/agenInfoRoute');
 const logoRoute = require('./routes/logoRoute');
+const bannerRoute = require('./routes/bannerRoute');
 
 
 
@@ -34,6 +35,7 @@ app.use('/api/v1/user',userRoute)
 app.use('/api/v1/agentpoint',agentPointRouter)
 app.use('/api/v1/agentinfo',agentInfoRouter)
 app.use('/api/v1/logo',logoRoute)
+app.use('/api/v1/banner',bannerRoute)
 
 
 

@@ -1,9 +1,10 @@
 const express = require("express");
-const { addLogoController, getLogoController, updateLogoController ,deleteLogoController} = require("../controller/logoController");
+
 
 
 
 const multer = require('multer');
+const { addBannerController, getBannerController, updateBannerController, deleteBannerController } = require("../controller/bannerController");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -21,19 +22,19 @@ const storage = multer.diskStorage({
 const router = express.Router();
 
 //ADD USER || METHOD POST
-router.post('/addlogo',upload.single('myFile'),addLogoController);
+router.post('/addbanner',upload.single('myFile'),addBannerController);
 
 
 //GET USER || METHOD GET
-router.get('/getlogo',getLogoController);
+router.get('/getbanner',getBannerController);
 
 
 //UPDATE USER || METHOD PUT
-router.put('/updateuser/:id',updateLogoController);
+router.put('/updatebanner/:id',updateBannerController);
 
 
 //DELETE USER || METHOD DELETE
-router.delete('/deletelogo/:id',deleteLogoController);
+router.delete('/deletebanner/:id',deleteBannerController);
 
 
 

@@ -1,9 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../layout/Layout";
 import { FaTachometerAlt } from "react-icons/fa";
-import Mian from "../Mian";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 function ManageLogo() {
+  const [logoData, setLogoData] = useState([]);
+
+  const getLogo = async () => {
+    try {
+      const { data } = await axios.get(
+        "http://localhost:8000/api/v1/logo/getlogo"
+      );
+      console.log(data);
+      if (data?.success) {
+        toast.success("Get All Agent Data ");
+
+        setLogoData(data?.data);
+        // console.log(agentInfoData)
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something Went Wrong");
+    }
+  };
+
+  useEffect(() => {
+    getLogo();
+  }, []);
+
+  //Delete category
+  const handleDelete = async (pId) => {
+    try {
+      const { data } = await axios.delete(
+        `http://localhost:8000/api/v1/logo/deletelogo/${pId}`
+      );
+      if (data.success) {
+        toast.success(`User is deleted`);
+      } else {
+        toast.error(data.error);
+      }
+      getLogo();
+    } catch (error) {
+      console.log(error);
+      toast.error("something went error");
+    }
+  };
+
   return (
     <Layout>
       <div className="row m-3  brd">
@@ -26,53 +69,45 @@ function ManageLogo() {
           DataTable Example
         </div>
         <div className="card-body ">
-
-        <div className='overflow-scroll'>
-        <table className="table table-bordered ">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td colspan="2">Larry the Bird</td>
-              <td>@twitter</td>
-            </tr>
-          </tbody>
-        </table>
+          <div className="overflow-scroll">
+            <table className="table table-bordered ">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Banner</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Handle</th>
+                </tr>
+              </thead>
+              <tbody>
+              {logoData?.map((e,index) => (
+                  <tr key={e._id}>
+                    <th scope="row">{index + 1}</th>
+                    <td>{e.image}</td>
+                    <td>{e.name}</td>
+                    <td className="d-flex">
+                      <button
+                        className="btn btn-primary ms-2"
+                        onClick={() => {}}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="btn btn-danger ms-2"
+                        onClick={() => {
+                          handleDelete(e._id);
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                
+              </tbody>
+            </table>
+          </div>
         </div>
-
-        </div>
-        
       </div>
     </Layout>
   );

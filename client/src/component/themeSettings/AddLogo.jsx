@@ -27,20 +27,15 @@ function AddLogo() {
   const handleUpload = async (e) => {
     e.preventDefault();
     try {
-
-
-
       const formdata = new FormData();
       formdata.append("myFile",FormValue.image,FormValue.image.name);
       formdata.append("name",FormValue.name);
-
-
+      
       const {data} = await axios.post('http://localhost:8000/api/v1/logo/addlogo',formdata)
       if(data?.success){
         toast.success("Added Successfully");
         SetFormValue({ name: "", image: "" });
       }
-
 
     } catch (error) {
       console.log(error);
